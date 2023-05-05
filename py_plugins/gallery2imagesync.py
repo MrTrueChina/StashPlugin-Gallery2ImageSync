@@ -371,6 +371,26 @@ def sync_one_to_one(client, gallery, image):
 # 对拥有多张图片的图库和其中的图片进行双向的数据同步
 def sync_ont_to_many(client, gallery, images):
 	# FIXME: 多图图库功能还没解决
+	# 查出四种标签的 id
+	gallery_to_image_tag_id = client.findTagIdWithName(sync_gallery_to_image_tag_name)
+	image_to_gallery_tag_id = client.findTagIdWithName(converge_image_to_gallery_tag_name)
+	disposable_gallery_to_image_tag_id = client.findTagIdWithName(disposable_sync_gallery_to_image_tag_name)
+	disposable_image_to_gallery_tag_id = client.findTagIdWithName(disposable_converge_image_to_gallery_tag_name)
+
+	# 查出图库的标签 id 列表
+	gallery_tag_id_list = [t.get('id') for t in gallery.get('tags')]
+
+	# 有图库同步到图片标签则进行图库数据同步到图片的处理
+	if gallery_to_image_tag_id in gallery_tag_id_list or disposable_gallery_to_image_tag_id in gallery_tag_id_list:
+		# TODO: 图库数据同步到图片的处理
+		pass
+
+	# 有图片数据集中到图库的标签则进行图片数据集中到图库的处理
+	if image_to_gallery_tag_id in gallery_tag_id_list or disposable_image_to_gallery_tag_id in gallery_tag_id_list:
+		# TODO: 图片数据集中到图库的处理
+		pass
+
+	# TODO: 保存数据
 	pass
 	# 把图集和图片的信息全都找出来，要查的完整
 	# 首先把图集的所有信息都传入到图片上，遵循“有的同步给没有的”，包括：data(日期)、url(链接)、rating100(分数)、organized(是否已整理)、studio(工作室)、tags(标签)、performers(角色)
