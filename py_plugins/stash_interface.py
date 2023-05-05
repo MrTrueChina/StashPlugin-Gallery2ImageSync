@@ -8,6 +8,8 @@ from urllib.parse import urlparse
 
 
 class StashInterface:
+    datas = {}
+
     port = ""
     url = ""
     headers = {
