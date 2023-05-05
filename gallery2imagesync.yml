@@ -1,0 +1,21 @@
+name: 图库与图片数据同步
+description: 对图库和图片的信息数据进行同步
+version: 1.0
+url: 
+exec:
+  - python
+  - "{pluginDir}/py_plugins/gallery2imagesync.py"
+interface: raw
+tasks:
+  - name: 创建功能标签
+    description: 创建本插件所需的多个标签，分别是：“🛠️将图库信息同步至图片”"🛠️将图片信息集中到图库""🛠️一次性将图库信息同步至图片""🛠️一次性将图片信息集中到图库"
+    defaultArgs:
+      mode: CREATE_FUNCTION_TAG
+  - name: 对带有标签的图库进行数据同步
+    description: 将带有“图库信息同步至图片”标签的图库的信息和标签同步至图片；将带有“图片信息集中到图库”标签的图库中的图片标签合并后添加给图库；对于有标签且只有一张图片的图库会直接对两者的数据进行合并；一次性标签将在同步后删除；
+    defaultArgs:
+      mode: SYNC_WITH_TAG
+  - name: 对所有图库进行数据同步
+    description: 将所有图库进行同步，可能需要很长时间。在运行前有 30 秒取消任务
+    defaultArgs:
+      mode: SYNC_ALL
