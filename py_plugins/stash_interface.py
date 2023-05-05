@@ -295,20 +295,3 @@ class StashInterface:
                 images.append(image)
 
         return images
-
-    # 更新图片的工作室信息
-    def updateImageStudio(self, image_ids, studio_id):
-        query = """
-        mutation($ids: [ID!], $studio_id: ID) {
-            bulkImageUpdate(input: { ids: $ids, studio_id: $studio_id }) {
-                id
-            }
-        }
-        """
-
-        variables = {
-            "ids": image_ids,
-            "studio_id": studio_id
-        }
-
-        self.__callGraphQL(query, variables)
